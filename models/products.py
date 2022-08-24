@@ -13,4 +13,4 @@ class Products(Base):
     created = Column(DateTime(timezone=True),server_default=func.now())
 
 
-    # sale = relationship("Sales", back_populates = 'products')
+    sales = relationship("Sales", back_populates = 'products')

@@ -1,13 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional, List
 from datetime import datetime
-
-class SalesBase(BaseModel):
-    quantity: int
-    created_at: datetime
-    completed: bool
-
-
 class ProductBase(BaseModel):
     name: str
     bp: int
@@ -41,8 +34,28 @@ class ProductInDB(ProductBase):
         orm_mode = True
 
 
+class SalesBase(BaseModel):
+    quantity: int
+    created_at: datetime
+    completed: bool
+    product_id: int
+
+
 class SalesInDB(SalesBase):
     id : int
-    created: datetime
-    completed: bool
-    product: ProductInfo        
+
+    class Config:
+        orm_mode = True
+  
+
+class SalesInfo(BaseModel):
+    id: Optional[int]
+    Name: Optional[str]
+    Quantity: Optional[int]
+    Profit: Optional[int]
+
+    class Config:
+        orm_mode = True    
+
+class SalesCreate(SalesBase):
+    pass        

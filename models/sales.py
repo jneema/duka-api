@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, ForeignKey, Boolean, datetime, DateTime
+from sqlalchemy import Column, Integer, ForeignKey, Boolean,  DateTime
 from db.base_class import Base
 from sqlalchemy.orm import relationship
+from datetime import datetime
 
 class Sales(Base):
     __tablename__ = 'sales'
@@ -10,4 +11,4 @@ class Sales(Base):
     created_at = Column(DateTime, nullable = False, default = datetime.utcnow)
     completed = Column(Boolean, default=False)
 
-    product = relationship("Products", back_populates='sales')
+    products = relationship("Products", back_populates='sales')
