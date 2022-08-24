@@ -11,8 +11,8 @@ def get_db() -> Generator:
         db.close()    
 
 app = FastAPI(
-    title="Todo API",
-    summary="A simple todo api",
+    title="Duka API",
+    summary="A simple duka api",
     version="0.1.0",
     docs_url="/developer/docs",
     redoc_url="/developer/redoc",
