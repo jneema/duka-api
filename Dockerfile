@@ -1,17 +1,16 @@
-FROM python:3.7.0
+FROM python:3.9 
 
-RUN mkdir app
+WORKDIR /app 
 
-COPY . .
+COPY . ./ 
 
-WORKDIR /
+EXPOSE 8000
 
 RUN python3 -m pip install --upgrade pip
 RUN pip install fastapi SQLAlchemy
-RUN pip3 install -r requirements.txt
-RUN pip install uvicorn
-RUN pip install firebase
-RUN pip install firebase-admin
+RUN pip install -r requirements.txt
+RUN pip install uvicorn 
 
+ 
 
-CMD ["uvicorn", "app.main:app","--reload"]
+CMD ["uvicorn", "app.main:app","--host=0.0.0.0","--reload"]
