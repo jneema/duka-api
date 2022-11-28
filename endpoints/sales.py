@@ -57,7 +57,7 @@ def add_sale(payload: SalesCreate,db: Session = Depends(get_db) ):
 
     if product:
         raise HTTPException(status_code=400, detail= f"{payload.product_id} is already taken")
-    res: SalesInfo = SalesModel(quantity = payload.quantity, created_at = datetime.utcnow(), product_id = payload.product_id, completed = payload.completed)
+    res: SalesInfo = SalesModel(quantity = payload.quantity, created_at = datetime.utcnow(), product_id = payload.product_id)
     db.add(res)
     db.commit()
     return res    

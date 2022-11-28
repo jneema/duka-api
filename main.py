@@ -1,5 +1,7 @@
 from typing import Union, Generator, List, Dict
 from endpoints.api import router
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from fastapi import Depends, FastAPI
 
@@ -20,8 +22,23 @@ app = FastAPI(
         "name": "Joy",
         "email":"joeyshem33@gmail.com"
     }
+    
 )
 
+origins = [
+    "http://localhost:4200"
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# daraja_api_client
+consumer_key="NKg34MD0tRAkKeut14DeEVFhAV2m2yRK"
+consumer_secret="bbttBBrzCS67kp4j"
 # models
 from models.products import Products
 

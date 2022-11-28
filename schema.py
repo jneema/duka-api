@@ -9,6 +9,7 @@ class ProductBase(BaseModel):
 
 class ProductCreate(ProductBase):
     pass
+
 class ProductPut(BaseModel):
     name: Optional[str]
     bp: Optional[int]       
@@ -36,13 +37,12 @@ class ProductInDB(ProductBase):
 
 class SalesBase(BaseModel):
     quantity: int
-    created_at: datetime
-    completed: bool
     product_id: int
 
 
 class SalesInDB(SalesBase):
     id : int
+    created_at: datetime
 
     class Config:
         orm_mode = True
