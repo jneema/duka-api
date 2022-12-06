@@ -28,6 +28,7 @@ app = FastAPI(
 origins = [
     "http://localhost:4200"
 ]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -47,7 +48,7 @@ from app.db.base_class import Base
 from app.db.session import engine, SessionLocal
 
 # create tables
-Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine) 
 
 app.include_router(router, responses={
                        200: {'description': 'Ok'},
