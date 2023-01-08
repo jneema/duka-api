@@ -58,24 +58,28 @@ def add_product(payload: ProductCreate,db: Session = Depends(get_db) ):
     db.commit()
     return res
 # make changes to the product details
-@product_router.put("/{productID}",
+@product_router.put("/products",
 response_model=ProductPut,
 summary="update a user item",
 status_code=200,
 )
-def edit_product(productID:int, payload:ProductPut, db: Session = Depends(get_db) ):
+def edit_product(payload:ProductPut, db: Session = Depends(get_db) ):
     # check if id exists
-    product = db.query(ProductsModel).filter_by(id=productID).first()
+    product = db.query(ProductsModel).filter_by(id=payload.id).first()
 
-    if product is None:
+    if not product:
         raise HTTPException(status_code=404, detail="Product does not exist")
     # update user details
-    res: ProductPut = ProductsModel(name = payload.name, bp = payload.bp, sp = payload.sp, serial_no = payload.serial_no)
-    db.add(res)
-    db.add(res)
+    product.id = payload.id
+    product.name = payload.name
+    product.bp = payload.bp
+    product.sp = payload.sp
+    product.serial_no = payload.serial_no
+    print(payload)
+
+    db.merge(product)
     db.commit()
 
-    return res
 
 # Delete product
 @product_router.delete("/{productID}",

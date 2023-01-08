@@ -11,6 +11,7 @@ class ProductCreate(ProductBase):
     pass
 
 class ProductPut(BaseModel):
+    id: Optional[int]
     name: Optional[str]
     bp: Optional[int]       
     sp: Optional[int]   
